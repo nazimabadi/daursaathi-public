@@ -1,0 +1,358 @@
+<title>Daur Saathi</title>
+<style>
+  :root {
+    --bg: #F3F5F3;
+    --surface: #EAEEEA;
+    --ink: #1A2420;
+    --muted: #5C6B63;
+    --accent: #2F6F5E;
+    --accent-ink: #F3F5F3;
+    --line: #D3DAD4;
+    --tag-write-bg: #E3D9C4;
+    --tag-write-ink: #6B5324;
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #10151A;
+      --surface: #171E22;
+      --ink: #E7ECE7;
+      --muted: #93A69C;
+      --accent: #6FC7AC;
+      --accent-ink: #0C1613;
+      --line: #263029;
+      --tag-write-bg: #2E2A1C;
+      --tag-write-ink: #D9C48C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #10151A;
+    --surface: #171E22;
+    --ink: #E7ECE7;
+    --muted: #93A69C;
+    --accent: #6FC7AC;
+    --accent-ink: #0C1613;
+    --line: #263029;
+    --tag-write-bg: #2E2A1C;
+    --tag-write-ink: #D9C48C;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 76px 28px 100px;
+  }
+
+  /* ---- masthead ---- */
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(40px, 7vw, 60px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+
+  .transliteration {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .lede {
+    font-size: 20px;
+    line-height: 1.55;
+    color: var(--ink);
+    max-width: 34em;
+    text-wrap: balance;
+  }
+  .lede em { font-style: italic; color: var(--muted); }
+
+  .name-gloss {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin: 34px 0 0;
+    padding: 20px 22px;
+    background: var(--surface);
+    border-radius: 10px;
+  }
+  .name-gloss div + div { border-left: 1px solid var(--line); padding-left: 18px; }
+  .name-gloss dt {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 5px;
+  }
+  .name-gloss dd { margin: 0; font-size: 15px; color: var(--muted); line-height: 1.5; }
+  .name-gloss dd b { color: var(--ink); font-weight: 600; }
+
+  /* ---- section rhythm ---- */
+
+  section { margin-top: 84px; }
+  section > h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 28px;
+    letter-spacing: -0.005em;
+    margin: 0 0 8px;
+  }
+  section > .section-note {
+    color: var(--muted);
+    font-size: 15.5px;
+    max-width: 40em;
+    margin-bottom: 36px;
+  }
+
+  p { margin: 0 0 16px; max-width: 40em; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---- why: philosophy list ---- */
+
+  .principles {
+    display: grid;
+    gap: 0;
+    margin-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .principle {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 24px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .principle dt {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .principle dd { margin: 0; color: var(--muted); font-size: 15px; max-width: 32em; }
+
+  /* ---- tools list ---- */
+
+  .tool-count {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 30px;
+  }
+  .tool-count b { color: var(--accent); font-variant-numeric: tabular-nums; }
+
+  .tools { border-top: 1px solid var(--line); }
+  .tool {
+    display: grid;
+    grid-template-columns: 230px 1fr;
+    gap: 28px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .tool-name-wrap { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+  .tool-name {
+    font-family: var(--font-mono);
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--ink);
+    word-break: break-word;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--muted);
+  }
+  .tag.write { background: var(--tag-write-bg); color: var(--tag-write-ink); }
+  .tool p { margin: 0; color: var(--ink); font-size: 15px; max-width: 38em; }
+
+  /* ---- privacy ---- */
+
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 28px;
+    margin-top: 30px;
+  }
+  .privacy-item .num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .privacy-item h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  .privacy-item p { font-size: 14.5px; color: var(--muted); margin: 0; }
+
+  /* ---- footer ---- */
+
+  footer {
+    margin-top: 96px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+  }
+  footer .foot-name { font-family: var(--font-display); color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 620px) {
+    .page { padding: 52px 20px 72px; }
+    .name-gloss { grid-template-columns: 1fr; }
+    .name-gloss div + div { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 14px; }
+    .principle, .tool { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<div class="page">
+
+  <div class="kicker">A personal running companion, built on top of Garmin</div>
+  <h1>Daur Saathi</h1>
+  <div class="transliteration">دور ساتھی &nbsp;·&nbsp; daur (a lap, a round — also an era) + saathi (the one who is with you)</div>
+
+  <p class="lede">A tool that reads a runner's own Garmin data — pace, heart rate, sleep, splits, how a body's been holding up — and talks about it in plain language, through Claude. <em>It reports, reflects, and asks. It does not command.</em></p>
+
+  <dl class="name-gloss">
+    <div>
+      <dt>The name</dt>
+      <dd><b>Daur</b> is a lap or a round, and — through the same root — an era: a lap of a run and a chapter of a life read the same way. <b>Saathi</b> is companion, specifically the one who runs alongside, not ahead.</dd>
+    </div>
+    <div>
+      <dt>Versus Garmin Connect</dt>
+      <dd>Garmin Connect describes a run. It doesn't know an injury history, doesn't hold more than one limiter at a time, and never asks how a session actually felt. Daur Saathi does, because it's been told, and it remembers.</dd>
+    </div>
+  </dl>
+
+  <section id="why">
+    <h2>Why it exists</h2>
+    <p class="section-note">Every design call here traces back to one rule, held on purpose against the pull of building something that just hands out verdicts.</p>
+    <dl class="principles">
+      <div class="principle"><dt>Mirror, not driver</dt><dd>Reports what the data shows, offers options, asks questions — never prescribes. The decision always stays with the runner.</dd></div>
+      <div class="principle"><dt>No sycophancy</dt><dd>No praise by default, no "great job." A good day and a bad day get the same plain treatment.</dd></div>
+      <div class="principle"><dt>Observed vs. inferred</dt><dd>A measured fact and an educated guess are never allowed to look the same on the page.</dd></div>
+      <div class="principle"><dt>Several limiters at once</dt><dd>Fatigue, an old niggle, a packed week — held together, never collapsed down to whichever one came up most recently.</dd></div>
+      <div class="principle"><dt>Rolling over single</dt><dd>The trailing weeks matter more than any one run, on purpose — it's the fix for reading too much into a single bad day.</dd></div>
+    </dl>
+  </section>
+
+  <section id="capabilities">
+    <h2>What it can actually do</h2>
+    <p class="section-note">Twelve tools Claude can call once it's connected. Eight only look things up. Four change something — three write down what the runner says, one pulls anything new in from Garmin.</p>
+    <div class="tool-count"><b>12</b> tools &nbsp;·&nbsp; <b>8</b> read-only &nbsp;·&nbsp; <b>4</b> write</div>
+
+    <div class="tools">
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">get_recent_runs</span><span class="tag">reads</span></div>
+        <p>Lists the last several runs — date, duration, distance, pace, heart rate — and calls each one's actual character: easy, hard, steady, intervals, with the confidence behind the call. Garmin mislabels sessions often enough that this makes its own read rather than trusting the watch's tag.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">get_training_load</span><span class="tag">reads</span></div>
+        <p>How much running has actually happened lately, and how this week sits against the last four — the difference between a normal week and a real spike or a real lull.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">analyze_run</span><span class="tag">reads</span></div>
+        <p>Pulls apart one run second by second: whether a hill genuinely cost extra effort, whether form drifted as fatigue set in, how much of it was actually run at a given pace. Shows the prior night's sleep and heart-rate context alongside it — the run itself is graded the same regardless, but the context changes how the result reads.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">get_race_readiness</span><span class="tag">reads</span></div>
+        <p>For a race with a goal time on record: how much of each week's training has genuinely been run at the pace that goal needs. Not a predicted finish time — just what's actually been proven in training so far, and whether it's trending up.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">get_injury_history</span><span class="tag">reads</span></div>
+        <p>Turns scattered aches into episodes — when one started, how it's progressed, whether it's shown up during ordinary walking, which is the line between a niggle and something worth real attention.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">get_flags</span><span class="tag">reads</span></div>
+        <p>Ten fixed rules checked against the data — the same body part sore three days running, severity climbing inside one episode. Rules, not opinions, so the answer doesn't shift with how the question was phrased.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">adjust_session</span><span class="tag">reads</span></div>
+        <p>"I've got 40 minutes and my calf feels off — what now?" Weighs the time available, the last few days' load, what's next on the plan, and last night's sleep, then lays out real options with honest trade-offs. Never picks one.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">get_training_plan</span><span class="tag">reads</span></div>
+        <p>Reads back a plan written by hand — a statement of intent to check against, never a target being graded.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">sync_latest</span><span class="tag write">writes</span></div>
+        <p>Pulls anything new in from Garmin and analyzes it right away. Runs on its own every night, alongside a second pass that keeps sleep, heart-rate and stress data equally current.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">log_symptom</span><span class="tag write">writes</span></div>
+        <p>A new ache logged in the moment — body part, side, severity, what was happening — visible to the injury picture immediately.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">log_subjective</span><span class="tag write">writes</span></div>
+        <p>How a run actually felt, in the runner's own words, kept verbatim rather than tidied — the phrasing itself is treated as real evidence, weighted above the heart-rate number for the same session.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-name-wrap"><span class="tool-name">log_quran</span><span class="tag write">writes</span></div>
+        <p>Records a daily reading habit stacked alongside training — what was read, and what it was paired with (after fajr, before a run). Presence only: deliberately no streak, no score. A number would turn a quiet habit into a performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy">
+    <h2>How it stays private</h2>
+    <p class="section-note">The interesting part isn't that an AI can read running data — it's what it's specifically never allowed to touch.</p>
+    <div class="privacy-grid">
+      <div class="privacy-item">
+        <div class="num">01</div>
+        <h3>No password, ever</h3>
+        <p>The Garmin login lives on its own server, never in a conversation. Claude only ever gets back the results of tool calls it's allowed to make — never the credential itself.</p>
+      </div>
+      <div class="privacy-item">
+        <div class="num">02</div>
+        <h3>No GPS, anywhere</h3>
+        <p>Location data is stripped before anything else touches a record. Not filtered out later — never stored to begin with.</p>
+      </div>
+      <div class="privacy-item">
+        <div class="num">03</div>
+        <h3>One place only</h3>
+        <p>No third-party analytics, no separate tracing service. The data goes exactly one place: into the conversation that's actually using it.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    A personal project — built one runner's own tool, for their own training, on their own data.<br>
+    <span class="foot-name">Daur Saathi</span> — دور ساتھی
+  </footer>
+
+</div>
